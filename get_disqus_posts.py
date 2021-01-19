@@ -3,7 +3,6 @@ import json
 import time
 import plac
 import os
-import shutil
 
 forum = "predictit"
 
@@ -29,11 +28,6 @@ def main(thread_url: str, apikey: str, dir_out: str, limit: int = 100):
     endpoint += f"api_key={apikey}&forum={forum}&thread:link={thread_url}&limit={limit}"
     new_endpoint = endpoint
 
-    # empty/create output directory:
-    if os.path.isdir(dir_out):
-        shutil.rmtree(dir_out)
-    os.mkdir(dir_out)
-
     while True:
         response = requests.get(new_endpoint) # get API response
         if response.status_code != 200:
@@ -45,7 +39,7 @@ def main(thread_url: str, apikey: str, dir_out: str, limit: int = 100):
         print(f'Scraped page {doc_num}')
         doc_num += 1
         if out['cursor']['hasNext']:
-            time.sleep(2) # some wait time
+            time.sleep(4) # some wait time
             new_endpoint = endpoint + f'&cursor={out["cursor"]["next"]}' # update endpoint with cursor
         else:
             print(f"No more pages left.")

@@ -1,0 +1,5 @@
+disqus_key.txt
+out/*
+venv/*
+.idea/*
+/geckodriver.log
