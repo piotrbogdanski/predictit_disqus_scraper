@@ -3,3 +3,5 @@ out/*
 venv/*
 .idea/*
 /geckodriver.log
+url.txt
+/__pycache__/*

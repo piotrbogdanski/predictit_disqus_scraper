@@ -1,39 +1,12 @@
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
-from selenium.common.exceptions import ElementClickInterceptedException
 from selenium.webdriver.support import expected_conditions as EC
 import shutil
 import os
-import time
+from util import retry
 import glob
 import plac
-
-
-def retry(tries: int = 4, delay: int = 3):
-    """Retry calling the decorated function. Adopted from:
-    https://www.saltycrane.com/blog/2009/11/trying-out-retry-decorator-python/
-    :param tries: number of times to try (not retry) before giving up
-    :param delay: initial delay between retries in seconds
-    """
-
-    def deco_retry(f):
-
-        def f_retry(*args, **kwargs):
-            mtries = tries
-            while mtries > 1:
-                try:
-                    return f(*args, **kwargs)
-                except Exception as e:
-                    msg = "%s, Retrying in %d seconds..." % (str(e), delay)
-                    print(msg)
-                    time.sleep(delay)
-                    mtries -= 1
-            return f(*args, **kwargs)
-
-        return f_retry  # true decorator
-
-    return deco_retry
 
 
 @retry()
