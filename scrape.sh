@@ -1,5 +1,5 @@
-url="https://www.predictit.org/markets/detail/7001/Which-party-will-win-the-2021-Virginia-gubernatorial-election"
-Path="out"
+url="https://www.predictit.org/markets/detail/3698/Who-will-win-the-2020-US-presidential-election"
+Path="/home/piotr/projects/lukasz/us_election_predictit/out"
 
 # Create a directory if exists
 if [ -d $Path ]
@@ -24,4 +24,4 @@ disqus_key="$(cat disqus_key.txt)"
 
 # Scrape Disqus comments
 echo "Scraping comments..."
-python3 get_disqus_posts.py "$thread_url" "$disqus_key" $Path
+python3 get_disqus_posts.py "$thread_url" "$disqus_key" $Path -sleep-time 3

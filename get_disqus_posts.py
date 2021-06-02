@@ -8,7 +8,7 @@ from util import retry
 forum = "predictit"
 
 
-@retry(tries=3, delay=10, backoff=5)
+@retry(tries=5, delay=5, backoff=5)
 def scrape_endpoint(endpoint: str):
     response = requests.get(endpoint)
     if response.status_code != 200:
@@ -33,7 +33,6 @@ def main(thread_url: str, apikey: str, dir_out: str, limit: int = 100, sleep_tim
     :param limit: cursor limit for the API (100 is max)
     :return:
     """
-    global forum
     doc_num = 0
     # set up base endpoint (first result)
     endpoint = "https://disqus.com/api/3.0/threads/listPosts.json?"
